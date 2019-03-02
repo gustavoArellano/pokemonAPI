@@ -3,7 +3,6 @@ $('form').on('submit', function(e) {
 
     var types = $('input[type=text]').val().replace(' ', '');
     types = types.split(',');
-    // console.log(types);
     var trainerTypes = types.map(function(type) {
         // console.log(type);
         return $.ajax({
@@ -12,7 +11,6 @@ $('form').on('submit', function(e) {
             method: 'GET'
         });
     });
-    // console.log(trainerTypes);
 
     $.when.apply(null, trainerTypes)
         .then(function() {
