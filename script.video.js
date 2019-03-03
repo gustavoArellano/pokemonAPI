@@ -4,7 +4,6 @@ $('form').on('submit', function(e) {
     var types = $('input[type=text]').val().replace(' ', '');
     types = types.split(',');
     var trainerTypes = types.map(function(type) {
-        // console.log(type);
         return $.ajax({
             url: 'http://pokeapi.co/api/v2/type/' + type,
             dataType: 'json',
@@ -14,16 +13,13 @@ $('form').on('submit', function(e) {
 
     $.when.apply(null, trainerTypes)
         .then(function() {
-            // console.log(arguments);
             var pokemonTypes = Array.prototype.slice.call(arguments);
-            // console.log(pokemonTypes)
             getDoubleDmgTypes(pokemonTypes);
         });
 });
 
 function getDoubleDmgTypes(pokemonTypes) {
     pokemonTypes = pokemonTypes.map(function(types) {
-        // console.log(types);
         return types[0].damage_relations.double_damage_from;
     })
     pokemonTypes = flatten(pokemonTypes);
@@ -42,17 +38,14 @@ function getDoubleDmgTypes(pokemonTypes) {
 
         buildTeam(pokemon);
     });
-    // console.log(damageTypes)
 }
 
 function buildTeam(pokemon) {
     pokemon = pokemon.map(function(poke) {
         return poke[0].pokemon;
     });
-    // console.log(pokemon);
 
     pokemon = flatten(pokemon);
-        // console.log(pokemon);
     var team = [];
 
     for(var i = 0; i < 6; i++) {
