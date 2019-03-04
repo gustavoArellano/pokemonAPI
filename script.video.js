@@ -52,7 +52,6 @@ function buildTeam(pokemon) {
         team.push( getRandomPokemon(pokemon) );
     }
 
-    // console.log(team)
 
 }
 
