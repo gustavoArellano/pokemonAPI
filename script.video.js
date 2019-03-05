@@ -51,8 +51,6 @@ function buildTeam(pokemon) {
     for(var i = 0; i < 6; i++) {
         team.push( getRandomPokemon(pokemon) );
     }
-
-
 }
 
 function getRandomPokemon(pokemonArray) {
