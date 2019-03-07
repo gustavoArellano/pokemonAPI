@@ -20,7 +20,8 @@ $('form').on('submit', function(e) {
 
 function getDoubleDmgTypes(pokemonTypes) {
     pokemonTypes = pokemonTypes.map(function(types) {
-        return types[0].damage_relations.double_damage_from;
+        console.log(pokemonTypes)
+        return pokemonTypes[0].damage_relations.double_damage_from;
     });
     pokemonTypes = flatten(pokemonTypes);
 
@@ -71,11 +72,20 @@ function buildTeam(pokemon) {
 
 function displayPokemon(pokemon) {
     pokemon.forEach(function(poke) {
-        var $container = $('<div>').addClass('pokemon');
-        var $image = $('<img>').attr('src', 'http://pokeapi.co/media/img/' + poke.id + '.png');
-        var $title = $('<h2>').text(poke.name);
-        $container.append($image, $title);
-        $('.poke-container').append($container);
+        $.getJSON(function(data){
+            var pokeID = data.national_id;
+            var pokeName = data.name;
+            var pokeType1 = data.types[0].name;
+            if (data.types.length == 2) {
+                var pokeType2 = data.types[1].name;
+            }
+            else var pokeType2 = null;
+            var $container = $('<div>').addClass('pokemon');
+            var $image = $('<img>').attr('src', "http://pokeapi.co" + data.descriptions[0].resource_uri);
+            var $title = $('<h2>').text(poke.name);
+            $container.append($image, $title);
+            $('.poke-container').append($container);
+        });
     });
 }
 
